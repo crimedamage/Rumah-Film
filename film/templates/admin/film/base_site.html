@@ -1,0 +1,110 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+{% block title %}{{ title }} |{% endblock %}
+{% block extrahead %}{{ block.super }}
+
+<style>
+/* Center the loader */
+/*body{
+  background-color: white;
+  background-image:url('https://giphy.com/embed/nQDKSeRlIyfmw'); background-repeat:repeat;
+}*/
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+    <div class="head" style="background-image: {% static 'rmlogos.png'  %};">
+        <h1 id="name">Admin Dashboard FILM</h1>
+        {# <h1>{{ MEDIA_URL }}</h1> #}
+        
+    </div>
+{% endblock %}
+{% block object-tools %}
+    <form id="lod" method="POST">
+            {% csrf_token %}
+            <h1>{{request.path}}</h1>
+            <input type="text" name="lod_data" value="{{request.GET.q}}" class="vTextField">
+            <button class="button" type="submit">Load Data</button>
+              <div style="display:none; background-image: url('rmlogos.png');" id="loader">
+                  <h2>{{jumlah_data}}</h2>
+              </div>
+            
+            
+    </form>
+    <script>
+     //console.log('{{request.path}}')
+        // $.ajax({
+        //         url: "{{request.path}}",
+        //         type: 'GET',
+        //         data: {},
+        //         success: function (data) {
+        //             console.log('OKE SUKSES')
+        //         }
+        //     });
+        document.getElementById("loader").style.display = "none";
+        //document.getElementById("myDiv").style.display = "none";
+        let sizeData = document.querySelector('#lod')
+        sizeData.querySelector('input[name="lod_data"]').addEventListener('change', function(e){
+            document.getElementById("loader").style.display = "block";
+            let lod_data = e.target.value
+            // sizeData.action = {{request.path}}+lod_data+'/'
+
+            sizeData.action = '/admin3/data/'+lod_data+'/'
+        });
+      //   function showPage() {
+          
+      // }
+    </script>
+
+    {{block.super}}
+        
+    
+{% endblock object-tools %}
