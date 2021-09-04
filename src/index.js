@@ -1,16 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import '../node_modules/swiper/swiper-bundle.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// import SwiperCore from 'swiper'
-// import { Virtual } from 'swiper'
-// import { Swiper } from 'swiper/swiper-bundle'
-
 // import AppLogo from './media/rmlogos.png'
-// import StarRatingLogo from './media/star-rating-sprite.png'
 
 ReactDOM.render(
   <React.StrictMode>

@@ -4,7 +4,7 @@ import ThemeSwitch from '../components/ThemeSwitch'
 const Footer = () => {
   return (
 		<footer
-			className="text-white dark:text-gray-300 transition duration-500 ease-in-out transform bg-purple-700 dark:bg-gray-900">
+			className="text-white dark:text-gray-300 transition duration-500 ease-in-out transform bg-indigo-800 dark:bg-gray-900">
 			<div
 				className="container flex flex-col flex-wrap p-8 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap ">
 				<div className="flex flex-wrap flex-grow mt-8 text-left md:mt-0 ">
@@ -19,23 +19,23 @@ const Footer = () => {
 						<nav className="mb-10 space-y-4 list-none">
 							<li>
 								<a
-									className=" mr-1 text-sm text-blueGray-500 transition duration-500 ease-in-out transform rounded-sm focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">Home</a>
+									className="cursor-pointer mr-1 text-sm text-blueGray-500 transition duration-500 ease-in-out transform rounded-sm focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">Home</a>
 							</li>
 							<li>
 								<a
-									className=" mr-1 text-sm text-blueGray-500 transition duration-500 ease-in-out transform rounded-sm focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">About</a>
+									className="cursor-pointer mr-1 text-sm text-blueGray-500 transition duration-500 ease-in-out transform rounded-sm focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">About</a>
 							</li>
 						</nav>
 					</div>
 					<div className="w-full px-8 md:w-1/4">
 						<span className="inline-flex justify-start sm:mb-12">
-							<a className="text-blue-500 hover:text-black">
+							<a className="dark:text-blue-500 hover:text-gray-900 dark:hover:text-black">
 								<svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5"
 									viewBox="0 0 24 24">
 									<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
 								</svg>
 							</a>
-							<a className="ml-3 text-blue-500 hover:text-black">
+							<a className="ml-3 dark:text-blue-500 hover:text-gray-900 dark:hover:text-black">
 								<svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5"
 									viewBox="0 0 24 24">
 									<path
@@ -43,14 +43,14 @@ const Footer = () => {
 									</path>
 								</svg>
 							</a>
-							<a className="ml-3 text-blue-500 hover:text-black">
+							<a className="ml-3 dark:text-blue-500 hover:text-gray-900 dark:hover:text-black">
 								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 									className="w-5 h-5" viewBox="0 0 24 24">
 									<rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
 									<path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
 								</svg>
 							</a>
-							<a className="ml-3 text-blue-500 hover:text-black">
+							<a className="ml-3 dark:text-blue-500 hover:text-gray-900 dark:hover:text-black">
 								<svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
 									stroke-width="0" className="w-5 h-5" viewBox="0 0 24 24">
 									<path stroke="none"

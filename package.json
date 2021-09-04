@@ -12,12 +12,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "update": "pip freeze > requirements.txt && pip install -r requirements.txt",
+    "freeze": "pip freeze > requirements.txt",
+    "update": "pip install -r requirements.txt",
     "start": "npm run prestart && react-scripts start",
     "build": "NOD_ENV=production npm run prestart && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prestart": "postcss src/assets/tailwind.css -o src/index.css"
+    "prestart": "postcss src/tailwind.css -o src/index.css"
   },
   "eslintConfig": {
     "extends": [
@@ -40,10 +41,11 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@tailwindcss/forms": "^0.3.3",
+    "@types/swiper": "^5.4.3",
     "autoprefixer": "^10.3.4",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
-    "swiper": "^7.0.2",
+    "swiper": "^6.8.4",
     "tailwindcss": "^2.2.9"
   }
 }
