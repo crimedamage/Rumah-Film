@@ -6,7 +6,9 @@ LINK_CHOICES ={
 }
 class Film(models.Model):
 	idfilm  = models.IntegerField(default=0)
-	namafilm = models.CharField(max_length=100)
+	namafilm = models.CharField(max_length=100,default="")
+	genrefilm = models.CharField(max_length=100,default="")
+	# tahunfilm = models.DateField(max_length=100,default="YYYY-MM-DD")
 	# image = models.ImageField(upload_to='Films')
 	# category = MultiSelectField(choices=CATEGORY_CHOICES)
 	# negara = models.CharField(choices=NEGARA_CHOICES, max_length=10,default="other")
