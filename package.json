@@ -1,0 +1,51 @@
+{
+  "name": "rumah-film",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "freeze": "pip freeze > requirements.txt",
+    "update": "pip install -r requirements.txt",
+    "start": "npm run prestart && react-scripts start",
+    "build": "NOD_ENV=production npm run prestart && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prestart": "postcss src/tailwind.css -o src/index.css"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@tailwindcss/forms": "^0.3.3",
+    "@types/swiper": "^5.4.3",
+    "autoprefixer": "^10.3.4",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1",
+    "swiper": "^6.8.4",
+    "tailwindcss": "^2.2.9"
+  }
+}
