@@ -3,7 +3,7 @@ import React from 'react'
 import SwiperCore, { Navigation, Pagination, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import StartRating from './StartRating';
+import StartRating from '../StartRating';
 
 const MostWatched = () => {
   SwiperCore.use([Navigation, Pagination, A11y]);

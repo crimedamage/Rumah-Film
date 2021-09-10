@@ -3,9 +3,9 @@ import React from 'react'
 import SwiperCore, { Navigation, Pagination, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import StartRating from './StartRating';
+import StartRating from '../StartRating';
 
-const Recomendation = () => {
+const Jumbotron = () => {
   SwiperCore.use([Navigation, Pagination, A11y]);
 
   const films = [
@@ -23,10 +23,10 @@ const Recomendation = () => {
 
   return (
     <>
-      <h1 className="text-white transition dark:text-gray-300 pl-7 py-5 text-xl bg-indigo-600 dark:bg-gray-900 mb-1 rounded">RECENLY ADDED</h1>
+      <h1 className="text-white transition dark:text-gray-300 pl-7 py-5 text-xl bg-indigo-600 dark:bg-gray-900 mb-1 rounded">TOP RATED</h1>
 
       <Swiper
-        id="mostSwipe"
+        id="jumbotronSwipe"
         // install Swiper modules
         modules={[Navigation, Pagination, A11y]}
         spaceBetween={3}
@@ -64,4 +64,4 @@ const Recomendation = () => {
   )
 }
 
-export default Recomendation
+export default Jumbotron

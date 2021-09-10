@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
-import MostWatched from './MostWatched';
-import RecenlyAdded from './RecenlyAdded';
-import Recomendation from './Recomendation';
+import MostWatched from './home/MostWatched';
+import RecenlyAdded from './home/RecenlyAdded';
+import Recomendation from './home/Recomendation';
 import SideContent from './SideContent';
 
 const Content = () => {
+  useEffect(() => {
+    
+  }, [])
 
+  const fetchItems = fetch('http://127.0.0.1:8000/api/home_page')
 
   return (
     <div className="flex justify-between">

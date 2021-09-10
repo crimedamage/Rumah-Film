@@ -4,7 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// import AppLogo from './media/rmlogos.png'
+import '../node_modules/swiper/swiper.min.css';
+import '../node_modules/swiper/components/navigation/navigation.min.css';
+import '../node_modules/swiper/components/pagination/pagination.min.css';
+import '../node_modules/swiper/components/scrollbar/scrollbar.min.css';
 
 ReactDOM.render(
   <React.StrictMode>

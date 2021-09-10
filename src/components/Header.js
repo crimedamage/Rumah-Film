@@ -1,5 +1,6 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 const Header = ({ title, navbar }) => {
 
@@ -13,9 +14,9 @@ const Header = ({ title, navbar }) => {
           navbar.map((x) => {
             return (
               <>
-                <li>
-                  <a className={`text-sm ${window.location.pathname == x.url ? 'text-blue-600 font-bold' : 'text-gray-400 hover:text-gray-300'}`} href={x.url}>{x.name}</a>
-                </li>
+                <Link to={x.url}>
+                  <li className={`text-sm ${window.location.pathname == x.url ? 'text-blue-600 font-bold' : 'text-gray-400 hover:text-gray-300'}`}>{x.name}</li>
+                </Link>
                 <li className="text-gray-300">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill"
                     viewBox="0 0 24 24">
@@ -93,7 +94,7 @@ const Header = ({ title, navbar }) => {
 
 Header.defaultProps = {
   navbar: [
-    { name: "SEMUA", url: '/all' },
+    { name: "SEMUA", url: '/list' },
     { name: "TOP RATING", url: '/top-rating' },
     { name: "MOST WATCHED", url: '/most-watched' },
     { name: "TAHUN", url: '/year' },
@@ -101,8 +102,8 @@ Header.defaultProps = {
 }
 
 Header.propTypes = {
-  title: PropTypes.string, 
-  navbar: PropTypes.object, 
+  title: PropTypes.string,
+  navbar: PropTypes.object,
 }
 
 export default Header
