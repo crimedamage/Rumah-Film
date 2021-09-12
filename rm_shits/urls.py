@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from film.views import get_load_data,RumahFilm,get_link_data
+from film.views import get_load_data,RumahFilm,get_link_data,RumahFilm_get,list_link
 #from film.admin import RmFilm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin3/data/<int:jumlah>/', get_load_data.page_ad),
     path('admin3/data/link/', get_link_data.check_link),
-    path('api/home_page', RumahFilm.home_page),
+    path('api/Film_API/<str:link>/<str:data>/<str:key>', RumahFilm.Film_API),
+    # path('api/Film_API/detail/<str:data>/<str:key>', RumahFilm.Film_API),
+    # path('api/detail/<int:id>', RumahFilm_get.get_details),
+    path('api/list_link',list_link)
 ]

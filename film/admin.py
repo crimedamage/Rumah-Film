@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.conf.urls import url
 from . import views
-
+from django.utils.html import format_html
 #Register your models here.
 
 # class adminFilm(admin.AdminSite):
@@ -38,7 +38,9 @@ class Filmadmin(admin.ModelAdmin):
 		# list_display = ('namafilm','bt_'+str(size))
 		pass
 	def ID_FILM(self,obj):
-		return obj.idfilm
+		if obj.idfilm == True:
+			return format_html("<img src='media/rmlogos.png'>")
+		
 	# def get_oke(self,request):
 	# 	print("oke")
 	# def view_check():

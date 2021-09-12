@@ -6,11 +6,6 @@ import Recomendation from './home/Recomendation';
 import SideContent from './SideContent';
 
 const Content = () => {
-  useEffect(() => {
-    
-  }, [])
-
-  const fetchItems = fetch('http://127.0.0.1:8000/api/home_page')
 
   return (
     <div className="flex justify-between">

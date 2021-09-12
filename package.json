@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "concurrently": "^6.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
@@ -15,9 +16,14 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "serve": "concurrently \"npm:django\" \"npm:build\"",
+    "dev": "concurrently \"npm:django\" \"npm:react\"",
+    "django": "run-script-os",
+    "django:darwin:linux": "./manage.py runserver",
+    "django:win32": ".\\manage.py runserver",
     "freeze": "pip freeze > requirements.txt",
     "update": "pip install -r requirements.txt",
-    "start": "npm run prestart && react-scripts start",
+    "react": "react-scripts start",
     "build": "NOD_ENV=production npm run prestart && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -48,7 +54,9 @@
     "autoprefixer": "^10.3.4",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
+    "run-script-os": "^1.1.6",
     "swiper": "^6.8.4",
     "tailwindcss": "^2.2.9"
-  }
+  },
+  "proxy": "http://localhost"
 }

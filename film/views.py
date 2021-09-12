@@ -6,12 +6,15 @@ import requests,json
 from django.shortcuts import redirect
 import time
 import os
+from django.core import serializers
 
 # Create your views here.
 from dotenv import load_dotenv
 
 load_dotenv()
 A_K = os.getenv('API_KEY_FILM')
+
+#for databases
 class get_load_data:
 	def page_ad(request,jumlah):
 		global reques
@@ -29,13 +32,16 @@ class get_load_data:
 			# t1.start()
 			# time.sleep(1)
 			# t1.join()
-			return get_load_data.print_square(request,jumlah)
+			return get_load_data.get_data(request,jumlah)
+		else:
+			return redirect('/admin/film/film/')
+
 	# def change_page(request,jumlah):
 	# 	context = {
 	# 		'jumlah_data' : int(jumlah)
 	# 	}
 	# 	return render(request,"admin/film/load.html",context)
-	def print_square(request,nilai):
+	def get_data(request,nilai):
 		# for x in range(3):
 		# 	time.sleep(3)
 		# 	print("hitungan ke : ",x)
@@ -55,14 +61,27 @@ class get_load_data:
 					if ad_data.objects.filter(idfilm=resp_dict['id']).exists():
 						print("data sudah Ada")
 					else:
-						ad_data.objects.create(idfilm=resp_dict['id'],namafilm=resp_dict['title'])
+						#print(resp_dict['genres'])
+						genr = ""
+						genrNum=0
+						for X_ in resp_dict['genres']:
+							genrNum +=1
+							genr += X_['name']
+							if genrNum < len(resp_dict['genres']):
+								genr +="," 
+							# print(X_)
+							# print(X_['name'])
+							# print(len(X_))
+							# print(len(resp_dict['genres']))
+
+						ad_data.objects.create(idfilm=resp_dict['id'],namafilm=resp_dict['title'],genrefilm=genr.lower())
 					# ad_data1.Film = ad_data.objects.get(idfilm=resp_dict['id'],namafilm=resp_dict['title'])
 					# ad_data1.objects.create(Film=resp_dict['title'])
-					print(resp_dict['id'])
-					print(resp_dict['title'])
+					# print(resp_dict['id'])
+					# print(resp_dict['title'])
 		
 		return redirect('/admin/film/film/')
-
+#for databases
 class get_link_data:
 	def check_link(request):
 		ad_data1 = Links_Film
@@ -83,34 +102,212 @@ class get_link_data:
 	# 	#print(t1.deamon())
 	# 	return render(request,"admin/film/load.html",context)
 
+# for views html json
+genre = ['action','adventure','animation','anime'
+		,'biografi','comedy','crime','documentary'
+		,'drama','fantasy','horor','musical','mystery'
+		,'romance','sci-fi','sport','thriller','war']
+# 	('action','ACTION'),
+# 	('adventure','ADVENTURE'),
+# 	('animation','ANIMATION'),
+# 	('anime','ANIME'),
+# 	('biografi','BIOGRAFI'),
+# 	('comedy','COMEDY'),
+# 	('crime','CRIME'),
+# 	('documentary','DOCUMENTARY'),
+# 	('drama','DRAMA'),
+# 	('fantasy','FANTASY'),
+# 	('horor','HOROR'),
+# 	('musical','MUSICAL'),
+# 	('mystery','MYSTERY'),
+# 	('romance','ROMANCE'),
+# 	('sci-fi','SCI-FI'),
+# 	('sport','SPORT'),
+# 	('thriller','THRILLER'),
+# 	('war','WAR'),
 class RumahFilm:
-	def home_page(request):
+	def Film_API(request,link,data,key):
+		response_data = {}
+		try:
+			if key == "ucok":
+				if link == "genre":
+					if data.lower() in genre:
+						
+						return RumahFilm_get.j_genre(request,data)
+					else:
+						response_data["404"] = ["ERROR"+link]
+				elif link == "detail":
+					return RumahFilm_get.get_details(request,data)
+				elif link == "film":
+					if data.lower() == "populer":
+						return RumahFilm_get.j_popular(request)
+					elif data.lower() == "trend":
+						return RumahFilm_get.j_tren(request)
+					elif data.lower() == "top":
+						return RumahFilm_get.j_top(request)
+					elif data.lower() == "recomended":
+						return RumahFilm_get.j_recomended(request)
+					elif link == "search":
+						return RumahFilm_get.j_search(request,data)
+					elif link == "latest":
+						return RumahFilm_get.j_latest(request)
+			# if data == "genre":
+			# 	return RumahFilm_get.j_genre(request)
+			# else:
+			# 	response_data = {}
+			# 	response_data["404"] = ["A NAN ANG CARI!!! \nden lapak kapalo ang ko a, MATI ANG!!!"]
+
+			# 	return HttpResponse(json.dumps(response_data),content_type="application/json")
+
+			else:
+			
+				response_data["404"] = ["ERROR"]
+
+				return HttpResponse(json.dumps(response_data),content_type="application/json")
+		except:
+			response_data["404"] = ["ERROR"]
+			return HttpResponse(json.dumps(response_data),content_type="application/json")
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+		
+class RumahFilm_get:
+	def j_genre(request,genre):
+		response_data = {}
+		try:
+			query = Film.objects.filter(genrefilm__icontains=genre.lower())
+			data = []
+
+			for x in query:
+				if "," in x.genrefilm:
+					genre = x.genrefilm.split(',')
+				else:
+					genre = genrefilm
+				data_x = {"id":x.idfilm,"nama":x.namafilm,"genre":genre}
+				data.append(data_x)
+
+			response_data["film"] ={"List":data}
+		except: 
+			response_data = ["Data Tidak Valid"]
+		
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+	def j_latest(request):
+		response_data = {}
+		response_data["latest"] = RumahFilm_get.get_film_dat("latest",0)['results']
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+	def j_popular(request):
 		response_data = {}
 		# query = "https://api.themoviedb.org/3/movie/popular?api_key="+API_key+"&language=en-US&page=500"
-		
-		response_data["popular"] = get_film_dat("p")['results'] 
-		response_data["trend"] = get_film_dat("t")['results']
+		response_data["popular"] = RumahFilm_get.get_film_dat("populer",0)
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+	def j_recomended(request):
+		response_data = {}
+		response_data["trend"] = RumahFilm_get.get_film_dat("recomended",0)['results']
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+	def j_search(request,data):
+		response_data = {}
+		response_data["search"] = RumahFilm_get.get_film_dat("search",0)['results']
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+	def j_top(request):
+		response_data = {}
+		response_data["top"] = RumahFilm_get.get_film_dat("top",0)['results']
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+	def j_tren(request):
+		response_data = {}
+		response_data["trend"] = RumahFilm_get.get_film_dat("trend",0)['results']
+		return HttpResponse(json.dumps(response_data),content_type="application/json")
+	def get_details(request,id):
+		response_data = {}
+		# query = "https://api.themoviedb.org/3/movie/popular?api_key="+API_key+"&language=en-US&page=500"
+		response_data["detail"] = RumahFilm_get.get_film_dat("detail_film",id)['title']
+		da = Film.objects.filter(idfilm=id)
+		print(id)
+		print(da[0])
+		response_data["detail_link_download"] = {
+		"link_144":list(to_json(da[0],"link_144")),
+		"link_240":list(to_json(da[0],"link_240")),
+		"link_360":list(to_json(da[0],"link_360")),
+		"link_480":list(to_json(da[0],"link_480")),
+		"link_720":list(to_json(da[0],"link_720")),
+		"link_1080":list(to_json(da[0],"link_1080"))
+		}
 		return HttpResponse(json.dumps(response_data),content_type="application/json")
 
+		# https://api.themoviedb.org/3/keyword/{keyword_id}?api_key=<<api_key>>
 
-def get_film_dat(tipe):
-	if tipe == "p":
-		response =  requests.get("https://api.themoviedb.org/3/movie/popular?api_key="+A_K+"&language=en-US&page=500")
-		array = response.json()
-		text = json.dumps(array)
-		resp_dict = json.loads(text)
-	elif tipe == "t":
-		response =  requests.get("https://api.themoviedb.org/3/trending/all/day?api_key="+A_K)
-		array = response.json()
-		text = json.dumps(array)
-		resp_dict = json.loads(text)
+	def get_film_dat(tipe,id):
+		if tipe == "populer":
+			query = "https://api.themoviedb.org/3/movie/popular?api_key="+A_K+"&language=en-US&page=500"
+			response =  requests.get(query)
+			array = response.json()
+			text = json.dumps(array)
+			resp_dict = json.loads(text)
+		elif tipe == "trend":
+			query = "https://api.themoviedb.org/3/trending/all/day?api_key="+A_K
+			response =  requests.get(query)
+			array = response.json()
+			text = json.dumps(array)
+			resp_dict = json.loads(text)
+		elif tipe == "latest":
+			query = "https://api.themoviedb.org/3/movie/latest?api_key="+A_K+"&language=en-US"
+			response =  requests.get(query)
+			array = response.json()
+			text = json.dumps(array)
+			resp_dict = json.loads(text)
+		elif tipe == "detail_film":
+			query = 'https://api.themoviedb.org/3/movie/'+str(id)+'?api_key='+A_K+'&language=en-US'
+			response =  requests.get(query)
+			array = response.json()
+			text = json.dumps(array)
+			resp_dict = json.loads(text)
+		elif tipe == "recomended":
+			query = 'https://api.themoviedb.org/3/movie/'+str(id)+'?api_key='+A_K+'&language=en-US'
+			response =  requests.get(query)
+			array = response.json()
+			text = json.dumps(array)
+			resp_dict = json.loads(text)
+		elif tipe == "search":
+			query = 'https://api.themoviedb.org/3/movie/'+str(id)+'?api_key='+A_K+'&language=en-US'
+			response =  requests.get(query)
+			array = response.json()
+			text = json.dumps(array)
+			resp_dict = json.loads(text)
 
-	elif tipe == "g":
-		pass
-	elif tipe == "d_f":
-		pass
+		else:
+			resp_dict = {}
+			resp_dict["404"] = ["ERROR"]
 
-	return resp_dict
+		return resp_dict
+	
+def to_json(dat,value):
+	# array = dat.json()
+	# text = json.dumps(array)
+	# resp_dict = json.loads(dat)
+	da1 = Links_Film.objects.filter(Film=dat).values(value)
+	data = []
+	for x in da1:
+		data.append(x.get(value))
+		if " " in x.get(value):
+			StringNya = ' '.join(map(str, data))
+			StringNya = StringNya.split(' ')
+		else:
+			StringNya = data
+	return StringNya
+
+def list_link(request):
+	response_data={}
+	response_data['link']={
+			"Genre": "api/Film_API/<str:link>/<str:data>/ucok",
+			"latest": "api/Film_API/film/latest/ucok",
+			"populer": "api/Film_API/film/populer/ucok",
+			"recomended":"api/Film_API/film/recomended/ucok",
+			"search": "api/Film_API/(namafilm yang akan di cari)/search/ucok",
+			"top": "api/Film_API/film/top/ucok",
+			"tren":"api/Film_API/film/tren/ucok",
+			"detail":"api/Film_API/detail/(id film)/<str:key>"
+		}
+	return HttpResponse(json.dumps(response_data),content_type="application/json")
+
+
+
 
 	
 			
