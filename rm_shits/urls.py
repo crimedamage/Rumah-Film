@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
 from . import views
-from film.views import get_load_data,RumahFilm,get_link_data,RumahFilm_get,list_link
+from django.conf import settings
+from film.views import get_load_data,get_link_data,RumahFilm_get,list_link,RumahFilm
 #from film.admin import RmFilm
 
 urlpatterns = [
@@ -28,3 +30,5 @@ urlpatterns = [
     # path('api/detail/<int:id>', RumahFilm_get.get_details),
     path('api/list_link',list_link)
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

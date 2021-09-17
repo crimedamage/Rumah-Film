@@ -7,7 +7,14 @@ LINK_CHOICES ={
 class Film(models.Model):
 	idfilm  = models.IntegerField(default=0)
 	namafilm = models.CharField(max_length=100,default="")
+	desc = models.TextField(default="")
+	date = models.DateField(max_length=100,default="YYYY-MM-DD")
+	poster = models.ImageField(upload_to='Films/poster',default="media/film/poster/cs.jpg")
 	genrefilm = models.CharField(max_length=100,default="")
+	rate = models.IntegerField(default=0)#top rated
+	popular = models.FloatField(default=0.0)# populer
+	vote_count = models.IntegerField(default=0)# trend
+	views_count = models.IntegerField(default=0)# most watched
 	# tahunfilm = models.DateField(max_length=100,default="YYYY-MM-DD")
 	# image = models.ImageField(upload_to='Films')
 	# category = MultiSelectField(choices=CATEGORY_CHOICES)
