@@ -11,9 +11,9 @@ const Jumbotron = () => {
   const [jumbotronState, setJumtoronState] = useState([])
 
   useEffect(() => {
-    fetch('/api/Film_API/film/popular/ucok').then((res) => {
+    fetch('/api/Film_API/film/top/ucok').then((res) => {
       if (res.ok) return res.json()
-    }).then((res) => setJumtoronState(res.popular.results)).catch((err) => console.log(err));
+    }).then((res) => setJumtoronState(res.lates.list)).catch((err) => console.log(err));
   }, [])
 
   return (
@@ -45,7 +45,7 @@ const Jumbotron = () => {
                     <div className="overflow-y-auto overflow-hidden h-14">
                       <a href={`api/Film_API/detail/${film.id}/${film.title}`} className=" text-white transition dark:text-gray-300">{film.title}</a>
                       <p className="text-white transition dark:text-gray-300 mt-2">
-                        <StartRating rating={film.vote_average * 10} />
+                        <StartRating rating={film.rate} />
                       </p>
                     </div>
                   </div>

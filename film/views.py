@@ -287,18 +287,18 @@ class RumahFilm_get:
 		return HttpResponse(json.dumps(response_data),content_type="application/json")
 	def j_top(request):
 		response_data = {}
-		print("popular")
+		
 		#query = Film.objects.order_by("-date")
 		query = Film.objects.filter(rate__range=(85,100)).order_by("-date")
 		data=[]
-		print(query)
+		
 		for x in query:
 			if "," in x.genrefilm:
 				genre = x.genrefilm.split(',')
 			else:
 				genre = genrefilm
-				data_x = {"id":x.idfilm,"title":x.namafilm,"genre":genre,"date":str(x.date),"rate":x.rate}
-				data.append(data_x)
+			data_x = {"id":x.idfilm,"title":x.namafilm,"genre":genre,"date":str(x.date),"rate":x.rate}
+			data.append(data_x)
 
 		response_data["lates"] = {"list":data}
 		# response_data =["null"]

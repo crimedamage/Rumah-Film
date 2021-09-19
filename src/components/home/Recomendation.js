@@ -23,7 +23,7 @@ const Recomendation = () => {
 
   return (
     <>
-      <h1 className="text-white transition dark:text-gray-300 pl-7 py-5 text-xl bg-indigo-600 dark:bg-gray-900 mb-1 rounded">RECENLY ADDED</h1>
+      <h1 className="text-white transition dark:text-gray-300 pl-7 py-5 text-xl bg-indigo-600 dark:bg-gray-900 mb-1 rounded">RECOMENDATION</h1>
 
       <Swiper
         id="mostSwipe"
