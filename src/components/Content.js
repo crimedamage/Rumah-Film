@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 
 import MostWatched from './home/MostWatched';
 import RecenlyAdded from './home/RecenlyAdded';

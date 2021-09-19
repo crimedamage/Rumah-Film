@@ -11,7 +11,7 @@ const Jumbotron = () => {
   const [jumbotronState, setJumtoronState] = useState([])
 
   useEffect(() => {
-    fetch('/api/Film_API/film/populer/ucok').then((res) => {
+    fetch('/api/Film_API/film/popular/ucok').then((res) => {
       if (res.ok) return res.json()
     }).then((res) => setJumtoronState(res.popular.results)).catch((err) => console.log(err));
   }, [])

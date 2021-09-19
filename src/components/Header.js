@@ -15,7 +15,7 @@ const Header = ({ title, navbar }) => {
             return (
               <>
                 <Link to={x.url}>
-                  <li className={`text-sm ${window.location.pathname == x.url ? 'text-blue-600 font-bold' : 'text-gray-400 hover:text-gray-300'}`}>{x.name}</li>
+                  <li className={`text-sm ${window.location.pathname === x.url ? 'text-blue-600 font-bold' : 'text-gray-400 hover:text-gray-300'}`}>{x.name}</li>
                 </Link>
                 <li className="text-gray-300">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill"
