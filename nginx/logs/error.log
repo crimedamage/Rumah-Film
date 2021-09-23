@@ -184,3 +184,5 @@
 2021/09/17 19:08:51 [emerg] 8052#12144: invalid port in upstream "http://127.0.0.1:3000" in D:\Documents\Coding\Python\rumah-film\nginx/conf/rm_film.conf:8
 2021/09/17 19:09:21 [notice] 1972#3484: signal process started
 2021/09/17 19:10:06 [notice] 10544#12284: signal process started
+2021/09/19 08:22:42 [error] 1272#7952: *70 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: ::1, server: 127.0.0.1, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost"
+2021/09/23 19:48:12 [notice] 1976#12816: signal process started

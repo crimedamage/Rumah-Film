@@ -43,7 +43,7 @@ const Jumbotron = () => {
                   <div className="flex items-end justify-end h-56 w-full bg-cover" style={{ backgroundImage: `url(https://source.unsplash.com/random/800x600)` }}></div>
                   <div className="px-5 py-3 h-20 text-center">
                     <div className="overflow-y-auto overflow-hidden h-14">
-                      <a href={`api/Film_API/detail/${film.id}/${film.title}`} className=" text-white transition dark:text-gray-300">{film.title}</a>
+                      <a href={"/"} className=" text-white transition dark:text-gray-300">{film.title}</a>
                       <p className="text-white transition dark:text-gray-300 mt-2">
                         <StartRating rating={film.rate} />
                       </p>
